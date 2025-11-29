@@ -11,5 +11,8 @@ COPY . /app/
 # Install dependencies
 RUN bun install
 
+# push the database schema to the database
+RUN bunx drizzle-kit push 
+
 # Start the Application
 CMD ["bun", "run", "start"]
