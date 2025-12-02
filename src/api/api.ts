@@ -1,6 +1,6 @@
 import { type Request, type Response, type Express } from "express"
-import { twitterTable } from "./db/schema"
-import { db } from "./db/database"
+import { twitterTable } from "../db/schema"
+import { db } from "../db/database"
 import { eq } from "drizzle-orm"
 
 //type Tweet = {id: number, tweet: string} // typisieren für die const tweet

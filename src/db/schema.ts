@@ -12,3 +12,9 @@ export const twitterTable = pgTable("twitter", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   tweet: varchar({ length: 255 }).notNull(),
 });
+
+export const userTable = pgTable("user", {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  username: varchar({ length: 255 }).notNull().unique(),
+  password: varchar({ length: 255 }).notNull(),
+});
