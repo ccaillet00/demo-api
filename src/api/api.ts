@@ -5,7 +5,7 @@ import { eq } from "drizzle-orm"
 
 //type Tweet = {id: number, tweet: string} // typisieren für die const tweet
 
-export const initializeAPI = (app: Express) => {
+export const initializePostsAPI = (app: Express) => {
 
     //const post: Tweet[] = []
     
