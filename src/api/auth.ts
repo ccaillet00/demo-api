@@ -24,7 +24,7 @@ if (!jwtSecret) {
     app.post("/api/auth/login", async (req: Request, res: Response) => {
         const { username, password } = req.body;
         const user = await db.select().from(userTable).where(eq(userTable.username, username)).limit(1);
-        const checkPassword = user[0] ? bcrypt.compareSync(password, user[0].password) : false;
+        const checkPassword = user[0]?.id ? bcrypt.compareSync(password, user[0].password) : false;
     
         if (!checkPassword) {
             return res.status(401).send({ message: "Invalid credentials" });
@@ -32,8 +32,8 @@ if (!jwtSecret) {
         else {
             return res.send({
                 message: "Login successful",
-                jwt: jwt.sign({ data: user[0] }, jwtSecret, { expiresIn: "1h"})
+                jwt: jwt.sign({ id: user[0]?.id }, jwtSecret, { expiresIn: "1h"})
             });
-        }
-    });
+        } 
+    }); console.log("Auth API initialized");
 }

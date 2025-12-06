@@ -1,6 +1,6 @@
 # Base Image with Bun pre-installed
 
-FROM oven/bun:latest
+FROM oven/bun:canary-alpine
 
 # Set the working directory 
 WORKDIR /app

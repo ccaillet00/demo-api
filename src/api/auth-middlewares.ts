@@ -20,9 +20,9 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
 
   const token = authHeader.split(' ')[1]
   try {
-    const secretKey = process.env.JWT_SECRET
-    if (!secretKey) throw new Error("JWT_SECRET is not defined in environment variables");
-    const payload = jwt.verify(token, secretKey) as UserPayload
+    const jwtSecret = process.env.JWT_SECRET
+    if (!jwtSecret) throw new Error("JWT_SECRET is not defined in environment variables");
+    const payload = jwt.verify(token, jwtSecret) as UserPayload
     req.user = payload
   } catch {
     req.user = undefined
