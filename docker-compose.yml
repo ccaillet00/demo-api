@@ -40,7 +40,3 @@ services:
       - .env
     command: ["bash", "-c" ,"sleep 10 && bunx drizzle-kit push"]
     restart: "no"
-    
-    
-
-      

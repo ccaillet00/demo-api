@@ -11,6 +11,9 @@ export const usersTable = pgTable("users", {
 export const twitterTable = pgTable("twitter", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   tweet: varchar({ length: 255 }).notNull(),
+  userId: integer()
+    .notNull()
+    .references(() => userTable.id, { onDelete: "cascade" }),
 });
 
 export const userTable = pgTable("user", {

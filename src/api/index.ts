@@ -1,8 +1,10 @@
 import type { Express } from "express"
 import { initializePostsAPI } from "./api"
 import { iniializeAuthAPI } from "./auth"
+import authMiddleware from "./auth-middlewares"
 
 export const initializeAPI = (app: Express) => {
+    app.use(authMiddleware)
     initializePostsAPI(app)
     iniializeAuthAPI(app)
 }

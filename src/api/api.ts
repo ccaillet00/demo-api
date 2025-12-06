@@ -16,8 +16,14 @@ export const initializePostsAPI = (app: Express) => {
     })
 
     app.post("/api/posts", async (req: Request, res: Response) => {
-        const createDBPost = await db.insert(twitterTable).values({tweet: req.body.tweet})
-        res.send(createDBPost)
+        const userId = req.user?.id;
+        if (!userId) {
+            res.status(401).send({ message: "Unauthorized" });
+            return;
+        }
+        const { tweet } = req.body;
+        const createDBPost = await db.insert(twitterTable).values({ tweet, userId }).returning()
+        res.send(createDBPost[0])
     })
 
     app.put("/api/posts/:id", async (req: Request, res: Response) => {

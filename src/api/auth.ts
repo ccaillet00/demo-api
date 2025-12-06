@@ -3,10 +3,14 @@ import bcrypt from "bcrypt"
 import { userTable } from "../db/schema"
 import { db } from "../db/database"
 import { eq } from "drizzle-orm"
+import jwt from "jsonwebtoken"
 
 export const iniializeAuthAPI = (app: Express) => {
 
-const jwtSecret = process.env.JWT_SECRET ||
+const jwtSecret = process.env.JWT_SECRET
+if (!jwtSecret) {
+    throw new Error("JWT_SECRET is not defined in environment variables");
+}
 
     app.post("/api/auth/register", async (req: Request, res: Response) => {
         const { username, password } = req.body;
@@ -26,8 +30,10 @@ const jwtSecret = process.env.JWT_SECRET ||
             return res.status(401).send({ message: "Invalid credentials" });
         }
         else {
-            return res.send({ message: "Login successful", user: user[0] });
+            return res.send({
+                message: "Login successful",
+                jwt: jwt.sign({ data: user[0] }, jwtSecret, { expiresIn: "1h"})
+            });
         }
-
-    })
+    });
 }
