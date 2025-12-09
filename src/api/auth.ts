@@ -29,11 +29,9 @@ if (!jwtSecret) {
         if (!checkPassword) {
             return res.status(401).send({ message: "Invalid credentials" });
         }
-        else {
-            return res.send({
-                message: "Login successful",
+        return res.send({
+            message: "Login successful",
                 jwt: jwt.sign({ id: user[0]?.id }, jwtSecret, { expiresIn: "1h"})
-            });
-        } 
+            }); 
     }); console.log("Auth API initialized");
 }
