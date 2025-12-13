@@ -33,11 +33,11 @@ services:
       - ./postgres_data:/var/lib/postgresql
 
   frontend-demo-api:
-    image: oceradien/frontend-demo-api:latest
+    image: oceradien/frontend-demp-api:latest
     container_name: frontend-demo-api
     restart: unless-stopped
     environment:
-      - NUXT_PUBLIC_API_BASE_URL=http://localhost:80
+      - NUXT_PUBLIC_API_BASE_URL=http://webserver:80
   
   database_migration:
     image: oceradien/demo-api:latest
